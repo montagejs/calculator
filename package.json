@@ -1,7 +1,8 @@
 {
-    "name": "montage-calculator",
+    "name": "calculator",
     "version": "0.1.0",
     "dependencies": {
         "montage": "0.12.4"
-    }
+    },
+    "bundle": ["components/main.reel"]
 }
