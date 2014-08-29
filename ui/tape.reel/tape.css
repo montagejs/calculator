@@ -28,7 +28,8 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-.tape-background {
+
+.Tape-background {
     height: 803px;
     background: -webkit-gradient(linear, left top, left bottom, from(#dfdfde), color-stop(0.5, #dfdfde), color-stop(0.51, #e7e7e7), color-stop(1, #e7e7e7), to(#e7e7e7));
     -webkit-background-size: 146px;

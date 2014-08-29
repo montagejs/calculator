@@ -28,9 +28,14 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-var Montage = require("montage").Montage;
+var Component = require("montage/ui/component").Component;
 
-var Expression = exports.Expression = Montage.create(Montage, {
+var Expression = exports.Expression = Component.specialize({
+    constructor: {
+        value: function Expression() {
+            this.super();
+        }
+    },
 
     OP_MINUS: {
         writable: false,
@@ -175,7 +180,7 @@ var Expression = exports.Expression = Montage.create(Montage, {
     build: {
         value: function(value) {
             if (this._type == this.TYPE_NUMBER) {
-                var expression = Montage.create(Expression);
+                var expression = new Expression();
                 expression.lhs = value;
                 this.lhs = expression;
             } else if (this._type == this.TYPE_COMPOUND) {
@@ -206,7 +211,7 @@ var Expression = exports.Expression = Montage.create(Montage, {
 
     clone: {
         value: function() {
-            var expression = Montage.create(Expression);
+            var expression = new Expression();
             if (this._type == this.TYPE_NUMBER) {
                 expression.lhs = this.lhs;
             } else if (this._type == this.TYPE_COMPOUND) {
@@ -270,6 +275,4 @@ var Expression = exports.Expression = Montage.create(Montage, {
             return this.result();
         }
     }
-
-
 });

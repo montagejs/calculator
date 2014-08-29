@@ -31,17 +31,22 @@ POSSIBILITY OF SUCH DAMAGE.
 </copyright> -->
 <html>
 <head>
-    <title>Calculator</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/icons/apple-touch-icon-152x152-precomposed.png">
+    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/icons/apple-touch-icon-120x120-precomposed.png">
+    <!-- For the iPad mini and the first- and second-generation iPad on iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="assets/icons/apple-touch-icon-76x76-precomposed.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="assets/icons/apple-touch-icon-precomposed.png">
+    <!-- For Android 3.x+ devices: -->
+    <link rel="icon" sizes="196x196" href="assets/icons/apple-touch-icon.png">
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="asset/image/apple-touch-icon-144x144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="asset/image/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="asset/image/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="asset/image/apple-touch-icon-precomposed.png">
+    <title>Calculator</title>
 
     <script>
         // Workaround for window.Touch on desktop browsers
@@ -57,59 +62,12 @@ POSSIBILITY OF SUCH DAMAGE.
     <script type="text/montage-serialization">
         {
             "owner": {
-                "module": "montage/ui/loader.reel",
-                "name": "Loader",
-                "properties": {
-                    "mainModule": "components/main.reel",
-                    "mainName": "Main"
-                }
-            },
-
-            "loadingPanel": {
-                "module": "montage/ui/loading-panel.reel",
-                "name": "LoadingPanel",
-                "properties": {
-                    "element": {"#": "loadingPanel"}
-                },
-                "bindings": {
-                    "initializedModuleCount": {"<-": "@owner.initializedModules.count()"},
-                    "requiredModuleCount": {"<-": "@owner.requiredModules.count()"}
-                }
+                "prototype": "montage/ui/loader.reel"
             }
-
         }
     </script>
-
-    <style type="text/css">
-        html {
-            height: 100%;
-        }
-        body {
-            height: 100%;
-            margin: 0;
-            background: #EBEBEB;
-
-        }
-        #loadingPanel {
-            width: 100%;
-            height: 100%;
-            display: -webkit-box;
-            -webkit-box-align: center;
-            -webkit-box-pack: center;
-            display: -moz-box;
-            -moz-box-align: center;
-            -moz-box-pack: center;
-            font: 1.2em sans-serif;
-            color: #555;
-            opacity: 0;
-        }
-        .montage-app-bootstrapping #loadingPanel {
-            opacity: 1;
-        }
-    </style>
-
 </head>
 <body>
-    <div id="loadingPanel">Loading…</div>
+    <span class="loading"></div>
 </body>
 </html>

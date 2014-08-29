@@ -1,3 +1,8 @@
+/**
+ * @module ui/calculator.reel
+ * @requires montage/ui/component
+ */
+
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -28,11 +33,20 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-var Montage = require("montage").Montage,
-    Component = require("montage/ui/component").Component,
-    Expression = require("model/expression").Expression;
 
-exports.Calculator = Montage.create(Component, {
+var Component = require("montage/ui/component").Component,
+	Expression = require("core/expression").Expression;
+
+/**
+ * @class Calculator
+ * @extends Component
+ */
+exports.Calculator = Component.specialize(/** @lends Calculator# */ {
+    constructor: {
+        value: function Calculator() {
+            this.super();
+        }
+    },
 
     _currentNumberStack: {
         enumerable: false,
@@ -137,7 +151,7 @@ exports.Calculator = Montage.create(Component, {
     buildExpression: {
         value: function() {
             if (this.expression == null) {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
             }
             var aNumberString = this._currentNumberStack.join('');
             if (aNumberString.indexOf(".") != -1) {
@@ -167,7 +181,7 @@ exports.Calculator = Montage.create(Component, {
     addOperatorToExpression: {
         value: function(operatorValue) {
             if (this.expression == null) {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
                 this.expression.build(0);
             }
             this.expression.addOperator(operatorValue);
@@ -207,7 +221,7 @@ exports.Calculator = Montage.create(Component, {
                     this.buildExpression();
                 }
             } else {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
                 this._currentNumberStack = ["0"];
                 this.buildExpression();
                 this.expression.addOperator(this._previousOperator);
@@ -446,5 +460,4 @@ exports.Calculator = Montage.create(Component, {
             this.updateNumber("0");
         }
     }
-
 });

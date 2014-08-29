@@ -28,7 +28,8 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-.tape-entry {
+
+.Tapeentry {
     min-height: 73px;
     width: 100%;
     padding-left: 5%;
@@ -40,7 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
     background-color: #dfdfde;
 }
 
-.tape-entry:nth-last-of-type(even) {
+.Tapeentry:nth-last-of-type(even) {
     background-color: #e7e7e7;
 }
 

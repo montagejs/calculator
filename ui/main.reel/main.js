@@ -1,3 +1,8 @@
+/**
+ * @module ui/main.reel
+ * @requires montage/ui/component
+ */
+
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -28,32 +33,18 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-var Montage = require("montage").Montage,
-    Component = require("montage/ui/component").Component,
-    Expression = require("model/expression").Expression;
 
-exports.Main = Montage.create(Component, {
+var Component = require("montage/ui/component").Component,
+	Expression = require("core/expression").Expression;
 
-    calculator: {
-        value: null,
-        serializable: true
-    },
-
-    tape: {
-        value: null,
-        serializable: true
-    },
-
-    prepareForDraw: {
-        value: function() {
-            this.calculator.addEventListener("calcResult", this, false);
-
-            // Fixes a CSS-Mask Bug in the Android Browser
-            var ua = navigator.userAgent.toLowerCase();
-            var isAndroid = ua.indexOf("android") > -1;
-            if(isAndroid) {
-            	this._element.classList.add("isAndroid");
-            }
+/**
+ * @class Main
+ * @extends Component
+ */
+exports.Main = Component.specialize(/** @lends Main# */ {
+    constructor: {
+        value: function Main() {
+            this.super();
         }
     },
 
@@ -61,7 +52,7 @@ exports.Main = Montage.create(Component, {
         value: function(event) {
             if (event.detail.expression) {
                 event.detail.expression.comment = "Calculator";
-                this.tape.addTapeEntry(event.detail.expression);
+                this.templateObjects.tape.addTapeEntry(event.detail.expression);
             }
         }
     },
@@ -69,14 +60,22 @@ exports.Main = Montage.create(Component, {
     // Once data is being saved/loaded the number of empty entries will change
     templateDidLoad: {
         value: function() {
+            this.templateObjects.calculator.addEventListener("calcResult", this, false);
+
             var screenHeight = screen.height;
             var defaultTapeHeight = 73;
             var noOfTapeEntries = parseInt(screenHeight / defaultTapeHeight);
-            var expression = Montage.create(Expression);
+            var expression = new Expression();
             for(var i = 0; i < noOfTapeEntries; i++) {
-                this.tape.addEmptyTapeEntry(expression);
+                this.templateObjects.tape.addEmptyTapeEntry(expression);
+            }
+
+            // Fixes a CSS-Mask Bug in the Android Browser
+            var ua = navigator.userAgent.toLowerCase();
+            var isAndroid = ua.indexOf("android") > -1;
+            if(isAndroid) {
+                this._element.classList.add("isAndroid");
             }
         }
     }
-
 });

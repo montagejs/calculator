@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!-- <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -30,40 +30,41 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> -->
 <html>
-    <head>
-        <title>Calculator</title>
-        <link rel="stylesheet" href="main.css" >
-        <link rel="stylesheet" href="../../asset/style/mobile.css" >
-        
-        <script type="text/montage-serialization">
-            {
-                "calculator": {
-                    "prototype": "components/calculator.reel",
-                    "properties": {
-                        "element": {"#": "calculator"}
-                    }
-                },
-                "tape": {
-                    "prototype": "components/tape.reel",
-                    "properties": {
-                        "element": {"#": "tape"}
-                    }
-                },
-                "owner": {
-                    "prototype": "components/main.reel",
-                    "properties": {
-                        "element": {"#": "mainElement"},
-                        "calculator": {"@": "calculator"},
-                        "tape": {"@": "tape"}
-                    }
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Main</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script type="text/montage-serialization">
+        {
+            "owner": {
+                "properties": {
+                    "element": {"#": "main"}
                 }
+            },
+
+            "tape": {
+                "prototype": "ui/tape.reel",
+                "properties": {
+                    "element": {"#": "tape"}
+                }
+            },
+
+            "calculator": {
+                "prototype": "ui/calculator.reel",
+                "properties": {
+                    "element": {"#": "calculator"}
+                }
+
             }
-        </script>
-    </head>
-    <body>
-        <div data-montage-id="mainElement" class="main">
-            <div data-montage-id="calculator" class="calculator"></div>
-            <div data-montage-id="tape" class="tape"></div>
-        </div>
-    </body>
+        }
+    </script>
+</head>
+<body>
+    <div data-montage-id="main" data-montage-skin="light" class="Main">
+        <div data-montage-id="calculator" class="Calculator"></div>
+        <div data-montage-id="tape" class="Tape"></div>
+    </div>
+</body>
 </html>

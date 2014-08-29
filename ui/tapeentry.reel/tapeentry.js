@@ -1,3 +1,8 @@
+/**
+ * @module ui/tapeentry.reel
+ * @requires montage/ui/component
+ */
+
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -28,13 +33,21 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-var Montage = require("montage").Montage;
+
 var Component = require("montage/ui/component").Component;
 
-exports.TapeEntry = Montage.create(Component, {
+/**
+ * @class Tapeentry
+ * @extends Component
+ */
+exports.Tapeentry = Component.specialize(/** @lends Tapeentry# */ {
+    constructor: {
+        value: function Tapeentry() {
+            this.super();
+        }
+    },
 
-	expression: {
+    expression: {
         value: null
     }
-
 });
