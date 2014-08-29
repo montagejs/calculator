@@ -12,5 +12,5 @@
         "run-tests.html",
         "test"
     ],
-    "bundle": [ "components/main.reel" ]
+    "bundle": [ "ui/main.reel" ]
 }
