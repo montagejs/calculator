@@ -45,6 +45,8 @@ exports.Calculator = Component.specialize(/** @lends Calculator# */ {
     constructor: {
         value: function Calculator() {
             this.super();
+
+            this.application.addEventListener("keyup", this, false);
         }
     },
 
@@ -458,6 +460,75 @@ exports.Calculator = Component.specialize(/** @lends Calculator# */ {
     handleZeroAction: {
         value: function(event) {
             this.updateNumber("0");
+        }
+    },
+
+    handleKeyup: {
+        value: function(event) {
+            switch(event.keyCode) {
+                case 48:
+                case 96:
+                    this.handleZeroAction();
+                    break;
+                case 49:
+                case 97:
+                    this.handleOneAction();
+                    break;
+                case 50:
+                case 98:
+                    this.handleTwoAction();
+                    break;
+                case 51:
+                case 99:
+                    this.handleThreeAction();
+                    break;
+                case 52:
+                case 100:
+                    this.handleFourAction();
+                    break;
+                case 53:
+                case 101:
+                    this.handleFiveAction();
+                    break;
+                case 54:
+                case 102:
+                    this.handleSixAction();
+                    break;
+                case 55:
+                case 103:
+                    this.handleSevenAction();
+                    break;
+                case 56:
+                case 104:
+                    this.handleEightAction();
+                    break;
+                case 57:
+                case 105:
+                    this.handleNineAction();
+                    break;
+
+                case 110:
+                case 190:
+                    this.handleDecimalAction();
+                    break;
+
+                case 106:
+                    this.handleMultiplyAction();
+                    break;
+                case 107:
+                    this.handlePlusAction();
+                    break;
+                case 109:
+                    this.handleMinusAction();
+                    break;
+                case 111:
+                    this.handleDivideAction();
+                    break;
+                case 13:
+                case 187:
+                    this.handleEqualAction();
+                    break;
+            }
         }
     }
 });
