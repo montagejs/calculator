@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!-- <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -31,33 +31,55 @@ POSSIBILITY OF SUCH DAMAGE.
 </copyright> -->
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/icons/apple-touch-icon-152x152-precomposed.png">
-    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/icons/apple-touch-icon-120x120-precomposed.png">
-    <!-- For the iPad mini and the first- and second-generation iPad on iOS ≥ 7: -->
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="assets/icons/apple-touch-icon-76x76-precomposed.png">
-    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-    <link rel="apple-touch-icon-precomposed" href="assets/icons/apple-touch-icon-precomposed.png">
-    <!-- For Android 3.x+ devices: -->
-    <link rel="icon" sizes="196x196" href="assets/icons/apple-touch-icon.png">
-
-    <title>Calculator</title>
-
-    <script src="node_modules/montage/montage.js"></script>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="tapeentry.css">
     <script type="text/montage-serialization">
-        {
-            "owner": {
-                "prototype": "montage/ui/loader.reel"
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "expression": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "lhs"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.expression.displayExpression"}
+            }
+        },
+        "result": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "rhs"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.expression.displayResult"}
+            }
+        },
+        "comment": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "comment"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.expression.comment"}
             }
         }
+    }
     </script>
 </head>
 <body>
-    <span class="loading"></div>
+    <div data-montage-id="owner" class="Tapeentry">
+        <div data-montage-id="tape-entry-content" class="tape-entry-content">
+            <div class="tape-entry-container">
+                <span data-montage-id="lhs" class="lhs"></span>
+                <span data-montage-id="rhs" class="rhs"></span>
+            </div>
+            <div data-montage-id="comment" class="tape-comment"></div>
+        </div>
+    </div>
 </body>
 </html>

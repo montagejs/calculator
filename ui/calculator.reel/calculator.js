@@ -1,3 +1,8 @@
+/**
+ * @module ui/calculator.reel
+ * @requires montage/ui/component
+ */
+
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -28,11 +33,22 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-var Montage = require("montage").Montage,
-    Component = require("montage/ui/component").Component,
-    Expression = require("model/expression").Expression;
 
-exports.Calculator = Montage.create(Component, {
+var Component = require("montage/ui/component").Component,
+	Expression = require("core/expression").Expression;
+
+/**
+ * @class Calculator
+ * @extends Component
+ */
+exports.Calculator = Component.specialize(/** @lends Calculator# */ {
+    constructor: {
+        value: function Calculator() {
+            this.super();
+
+            this.application.addEventListener("keyup", this, false);
+        }
+    },
 
     _currentNumberStack: {
         enumerable: false,
@@ -137,7 +153,7 @@ exports.Calculator = Montage.create(Component, {
     buildExpression: {
         value: function() {
             if (this.expression == null) {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
             }
             var aNumberString = this._currentNumberStack.join('');
             if (aNumberString.indexOf(".") != -1) {
@@ -167,7 +183,7 @@ exports.Calculator = Montage.create(Component, {
     addOperatorToExpression: {
         value: function(operatorValue) {
             if (this.expression == null) {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
                 this.expression.build(0);
             }
             this.expression.addOperator(operatorValue);
@@ -207,7 +223,7 @@ exports.Calculator = Montage.create(Component, {
                     this.buildExpression();
                 }
             } else {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
                 this._currentNumberStack = ["0"];
                 this.buildExpression();
                 this.expression.addOperator(this._previousOperator);
@@ -310,13 +326,13 @@ exports.Calculator = Montage.create(Component, {
         }
     },
 
-    handleMemoryClearRecallHold: {
+    handleMemoryClearRecallLongAction: {
         value: function(event) {
             this.memoryClear();
         }
     },
 
-    handleClearHold: {
+    handleClearLongAction: {
         value: function(event) {
             this.resetCalculator();
         }
@@ -445,6 +461,74 @@ exports.Calculator = Montage.create(Component, {
         value: function(event) {
             this.updateNumber("0");
         }
-    }
+    },
 
+    handleKeyup: {
+        value: function(event) {
+            switch(event.keyCode) {
+                case 48:
+                case 96:
+                    this.handleZeroAction();
+                    break;
+                case 49:
+                case 97:
+                    this.handleOneAction();
+                    break;
+                case 50:
+                case 98:
+                    this.handleTwoAction();
+                    break;
+                case 51:
+                case 99:
+                    this.handleThreeAction();
+                    break;
+                case 52:
+                case 100:
+                    this.handleFourAction();
+                    break;
+                case 53:
+                case 101:
+                    this.handleFiveAction();
+                    break;
+                case 54:
+                case 102:
+                    this.handleSixAction();
+                    break;
+                case 55:
+                case 103:
+                    this.handleSevenAction();
+                    break;
+                case 56:
+                case 104:
+                    this.handleEightAction();
+                    break;
+                case 57:
+                case 105:
+                    this.handleNineAction();
+                    break;
+
+                case 110:
+                case 190:
+                    this.handleDecimalAction();
+                    break;
+
+                case 106:
+                    this.handleMultiplyAction();
+                    break;
+                case 107:
+                    this.handlePlusAction();
+                    break;
+                case 109:
+                    this.handleMinusAction();
+                    break;
+                case 111:
+                    this.handleDivideAction();
+                    break;
+                case 13:
+                case 187:
+                    this.handleEqualAction();
+                    break;
+            }
+        }
+    }
 });

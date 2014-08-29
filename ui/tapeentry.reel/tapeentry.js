@@ -1,3 +1,8 @@
+/**
+ * @module ui/tapeentry.reel
+ * @requires montage/ui/component
+ */
+
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -28,37 +33,21 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-.tape-entry {
-    min-height: 73px;
-    width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    position: relative;
-    font-size: 1.25em;
-    background-color: #dfdfde;
-}
 
-.tape-entry:nth-last-of-type(even) {
-    background-color: #e7e7e7;
-}
+var Component = require("montage/ui/component").Component;
 
-.tape-comment {
-    color: #868281;
-    position: relative;
-    clear: both;
-    padding-bottom: 5px;
-}
+/**
+ * @class Tapeentry
+ * @extends Component
+ */
+exports.Tapeentry = Component.specialize(/** @lends Tapeentry# */ {
+    constructor: {
+        value: function Tapeentry() {
+            this.super();
+        }
+    },
 
-.tape-entry-content {
-    padding-top: 2%;
-    position: relative;
-}
-
-.tape-entry-container {
-    position: relative;
-}
-
-.lhs { width: 70%; position: relative; float: left; }
-.rhs { width: 30%; position: relative; float: right; font-weight: bold; text-align: right; }
+    expression: {
+        value: null
+    }
+});

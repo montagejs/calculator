@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!-- <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -30,40 +30,54 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> -->
 <html>
-    <head>
-        <title>Calculator</title>
-        <link rel="stylesheet" href="main.css" >
-        <link rel="stylesheet" href="../../asset/style/mobile.css" >
-        
-        <script type="text/montage-serialization">
-            {
-                "calculator": {
-                    "prototype": "components/calculator.reel",
-                    "properties": {
-                        "element": {"#": "calculator"}
-                    }
-                },
-                "tape": {
-                    "prototype": "components/tape.reel",
-                    "properties": {
-                        "element": {"#": "tape"}
-                    }
-                },
-                "owner": {
-                    "prototype": "components/main.reel",
-                    "properties": {
-                        "element": {"#": "mainElement"},
-                        "calculator": {"@": "calculator"},
-                        "tape": {"@": "tape"}
-                    }
-                }
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="tape.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
             }
-        </script>
-    </head>
-    <body>
-        <div data-montage-id="mainElement" class="main">
-            <div data-montage-id="calculator" class="calculator"></div>
-            <div data-montage-id="tape" class="tape"></div>
+        },
+        "scrollview": {
+            "prototype": "digit/ui/scroller.reel",
+            "properties": {
+                "element": {"#": "_scrollview"},
+                "hasMomentum": true,
+                "axis": "vertical"
+            }
+        },
+        "tapeentry": {
+            "prototype": "ui/tapeentry.reel",
+            "properties": {
+                "element": {"#": "tape-entry"}
+            },
+            "bindings": {
+                "expression": {"<-": "@repetition:iteration.object"}
+            }
+        },
+        "repetition": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "tape-content"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner.tapeData"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Tape">
+        <div style=" border-left:2px gray; height: 100%; width: 100%; float: right;">
+            <div data-montage-id="_scrollview" style="position: relative; width: 100%; height: 100%; overflow: hidden;">
+                <div data-montage-id="tape-content">
+                    <div class="content" data-montage-id="tape-entry"></div>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

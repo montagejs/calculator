@@ -1,3 +1,8 @@
+/**
+ * @module ui/main.reel
+ * @requires montage/ui/component
+ */
+
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -29,51 +34,48 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
 
-/* @override http://localhost:8082/montage-samples/calculator/components/main.reel/main.css */
+var Component = require("montage/ui/component").Component,
+	Expression = require("core/expression").Expression;
 
-html {
-    height: 100%;
-}
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-}
+/**
+ * @class Main
+ * @extends Component
+ */
+exports.Main = Component.specialize(/** @lends Main# */ {
+    constructor: {
+        value: function Main() {
+            this.super();
+        }
+    },
 
-.montage-invisible {
-    visibility: hidden;
-}
+    handleCalcResult: {
+        value: function(event) {
+            if (event.detail.expression) {
+                event.detail.expression.comment = "Calculator";
+                this.templateObjects.tape.addTapeEntry(event.detail.expression);
+            }
+        }
+    },
 
-.main {
-    height: 100%;
-}
+    // Once data is being saved/loaded the number of empty entries will change
+    templateDidLoad: {
+        value: function() {
+            this.templateObjects.calculator.addEventListener("calcResult", this, false);
 
-.tape {
-    font-family: Helvetica, Arial, sans-serif;
-    position: absolute;
-    width: 50%;
-    margin-left: 50%;
-    height: 100%;
-    border-left: 1px solid #bbb;
-    overflow: hidden;
-    opacity: 1;
-    top: 0px;
-}
-.calculator {
-    width: 50%;
-    height: 100%;
-}
+            var screenHeight = screen.height;
+            var defaultTapeHeight = 73;
+            var noOfTapeEntries = parseInt(screenHeight / defaultTapeHeight);
+            var expression = new Expression();
+            for(var i = 0; i < noOfTapeEntries; i++) {
+                this.templateObjects.tape.addEmptyTapeEntry(expression);
+            }
 
-@media (max-width: 1000px) {
-	.tape {
-        display: none;
-        pointer-events: none;
+            // Fixes a CSS-Mask Bug in the Android Browser
+            var ua = navigator.userAgent.toLowerCase();
+            var isAndroid = ua.indexOf("android") > -1;
+            if(isAndroid) {
+                this._element.classList.add("isAndroid");
+            }
+        }
     }
-
-    .calculator {
-        width: 100%;
-    }
-}
+});

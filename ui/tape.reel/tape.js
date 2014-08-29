@@ -1,3 +1,8 @@
+/**
+ * @module ui/tape.reel
+ * @requires montage/ui/component
+ */
+
 /* <copyright>
 Copyright (c) 2012, Motorola Mobility LLC.
 All Rights Reserved.
@@ -28,13 +33,44 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-var Montage = require("montage").Montage;
+
 var Component = require("montage/ui/component").Component;
 
-exports.TapeEntry = Montage.create(Component, {
+/**
+ * @class Tape
+ * @extends Component
+ */
+exports.Tape = Component.specialize(/** @lends Tape# */ {
+    constructor: {
+        value: function Tape() {
+            this.super();
+        }
+    },
+    
+    tapeData: {
+        enumerable: false,
+        value: [],
+        distinct: true
+    },
 
-	expression: {
-        value: null
+    addTapeEntry: {
+	    value: function(expression) {
+            this.tapeData.unshift(expression);
+            if (this.tapeData[this.tapeData.length-1].lhs == null) {
+                this.tapeData.pop();
+            }
+	    }
+    },
+
+    removeTapeEntry:{
+	    value: function(index) {
+            this.tapeData.splice(index, 1);
+	    }
+    },
+
+    addEmptyTapeEntry: {
+        value: function(expression) {
+            this.tapeData.push(expression);
+        }
     }
-
 });
