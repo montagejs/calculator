@@ -324,13 +324,13 @@ exports.Calculator = Component.specialize(/** @lends Calculator# */ {
         }
     },
 
-    handleMemoryClearRecallHold: {
+    handleMemoryClearRecallLongAction: {
         value: function(event) {
             this.memoryClear();
         }
     },
 
-    handleClearHold: {
+    handleClearLongAction: {
         value: function(event) {
             this.resetCalculator();
         }
