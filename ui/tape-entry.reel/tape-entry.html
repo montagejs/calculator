@@ -31,39 +31,53 @@ POSSIBILITY OF SUCH DAMAGE.
 </copyright> -->
 <html>
     <head>
-        <title>Calculator</title>
-        <link rel="stylesheet" href="main.css" >
-        <link rel="stylesheet" href="../../asset/style/mobile.css" >
-        
+        <link rel="stylesheet" href="tape-entry.css"/>
         <script type="text/montage-serialization">
-            {
-                "calculator": {
-                    "prototype": "components/calculator.reel",
-                    "properties": {
-                        "element": {"#": "calculator"}
-                    }
+        {   
+            "owner": {
+                "properties": {
+                    "element": {"#": "tape-entry"}
+                }
+            },
+            "expression": {
+                "prototype": "montage/ui/text.reel",
+                "properties": {
+                    "element": {"#": "lhs"}
                 },
-                "tape": {
-                    "prototype": "components/tape.reel",
-                    "properties": {
-                        "element": {"#": "tape"}
-                    }
+                "bindings": {
+                    "value": {"<-": "@owner.expression.displayExpression"}
+                }
+            },
+            "result": {
+                "prototype": "montage/ui/text.reel",
+                "properties": {
+                    "element": {"#": "rhs"}
                 },
-                "owner": {
-                    "prototype": "components/main.reel",
-                    "properties": {
-                        "element": {"#": "mainElement"},
-                        "calculator": {"@": "calculator"},
-                        "tape": {"@": "tape"}
-                    }
+                "bindings": {
+                    "value": {"<-": "@owner.expression.displayResult"}
+                }
+            },
+            "comment": {
+                "prototype": "montage/ui/text.reel",
+                "properties": {
+                    "element": {"#": "comment"}
+                },
+                "bindings": {
+                    "value": {"<-": "@owner.expression.comment"}
                 }
             }
+        }
         </script>
-    </head>
-    <body>
-        <div data-montage-id="mainElement" class="main">
-            <div data-montage-id="calculator" class="calculator"></div>
-            <div data-montage-id="tape" class="tape"></div>
+	</head>
+	<body>
+        <div data-montage-id="tape-entry" class="tape-entry">
+            <div data-montage-id="tape-entry-content" class="tape-entry-content">
+                <div class="tape-entry-container">
+                    <span data-montage-id="lhs" class="lhs"></span>
+                    <span data-montage-id="rhs" class="rhs"></span>
+                </div>
+                <div data-montage-id="comment" class="tape-comment"></div>
+            </div>
         </div>
-    </body>
+	</body>
 </html>

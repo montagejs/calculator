@@ -30,7 +30,8 @@ POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
 var Montage = require("montage").Montage;
 
-var Expression = exports.Expression = Montage.create(Montage, {
+// var Expression = exports.Expression = Montage.specialize(Montage, {
+var Expression = exports.Expression = Montage.specialize({
 
     OP_MINUS: {
         writable: false,
@@ -132,24 +133,24 @@ var Expression = exports.Expression = Montage.create(Montage, {
                 }
             } else if (this._type === this.TYPE_COMPOUND) {
                 switch(this.operator) {
-                    case this.OP_PLUS: {
-                        result = this.lhs.result() + this.rhs;
+                    case 'plus': {
+                        result = this.lhs + this.rhs;
                         break;
                     }
-                    case this.OP_MINUS: {
-                        result = this.lhs.result() - this.rhs;
+                    case 'minus': {
+                        result = this.lhs - this.rhs;
                         break;
                     }
-                    case this.OP_DIVIDE: {
+                    case 'divide': {
                         if (this.rhs != 0) {
-                            result = this.lhs.result() / this.rhs;
+                            result = this.lhs / this.rhs;
                         } else {
                             result = "Error";
                         }
                         break;
                     }
-                    case this.OP_MULTIPLY: {
-                        result = this.lhs.result() * this.rhs;
+                    case 'multiply': {
+                        result = this.lhs * this.rhs;
                         break;
                     }
                 }
@@ -175,9 +176,14 @@ var Expression = exports.Expression = Montage.create(Montage, {
     build: {
         value: function(value) {
             if (this._type == this.TYPE_NUMBER) {
-                var expression = Montage.create(Expression);
+                // var expression = Montage.create(Expression);
+                
+                // debugger;
+                expression = new Expression();
                 expression.lhs = value;
-                this.lhs = expression;
+                // this.lhs = expression;
+                this.lhs = value;
+                // debugger;
             } else if (this._type == this.TYPE_COMPOUND) {
                 this.rhs = value;
             }
@@ -190,9 +196,11 @@ var Expression = exports.Expression = Montage.create(Montage, {
     addOperator: {
         value: function(operator) {
             if (this._type == this.TYPE_NUMBER) {
+                // debugger;
                 this.operator = operator;
                 this._type = this.TYPE_COMPOUND;
             } else if (this._type == this.TYPE_COMPOUND) {
+                // debugger;
                 if (this.operator == null || this.rhs != null) {
                     this.lhs = this.clone();
                     this.operator = operator;
@@ -206,7 +214,8 @@ var Expression = exports.Expression = Montage.create(Montage, {
 
     clone: {
         value: function() {
-            var expression = Montage.create(Expression);
+            // var expression = Montage.create(Expression);
+            var expression = new Expression();
             if (this._type == this.TYPE_NUMBER) {
                 expression.lhs = this.lhs;
             } else if (this._type == this.TYPE_COMPOUND) {
@@ -223,19 +232,19 @@ var Expression = exports.Expression = Montage.create(Montage, {
         value: function(operator) {
             var result;
             switch(operator) {
-                case this.OP_PLUS: {
+                case 'plus': {
                     result = '+';
                     break;
                 }
-                case this.OP_MINUS: {
+                case 'minus': {
                     result = '-';
                     break;
                 }
-                case this.OP_DIVIDE: {
+                case 'divide': {
                     result = '÷';
                     break;
                 }
-                case this.OP_MULTIPLY: {
+                case 'multiply': {
                     result = '×';
                     break;
                 }

@@ -28,55 +28,13 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-var Montage = require("montage").Montage,
-    Component = require("montage/ui/component").Component,
-    Expression = require("model/expression").Expression;
+var Component = require("montage/ui/component").Component;
 
-exports.Main = Montage.create(Component, {
+// exports.Calculator = Montage.create(Component, {
+exports.TapeEntry = Component.specialize({
 
-    calculator: {
-        value: null,
-        serializable: true
-    },
-
-    tape: {
-        value: null,
-        serializable: true
-    },
-
-    prepareForDraw: {
-        value: function() {
-            this.calculator.addEventListener("calcResult", this, false);
-
-            // Fixes a CSS-Mask Bug in the Android Browser
-            var ua = navigator.userAgent.toLowerCase();
-            var isAndroid = ua.indexOf("android") > -1;
-            if(isAndroid) {
-            	this._element.classList.add("isAndroid");
-            }
-        }
-    },
-
-    handleCalcResult: {
-        value: function(event) {
-            if (event.detail.expression) {
-                event.detail.expression.comment = "Calculator";
-                this.tape.addTapeEntry(event.detail.expression);
-            }
-        }
-    },
-
-    // Once data is being saved/loaded the number of empty entries will change
-    templateDidLoad: {
-        value: function() {
-            var screenHeight = screen.height;
-            var defaultTapeHeight = 73;
-            var noOfTapeEntries = parseInt(screenHeight / defaultTapeHeight);
-            var expression = Montage.create(Expression);
-            for(var i = 0; i < noOfTapeEntries; i++) {
-                this.tape.addEmptyTapeEntry(expression);
-            }
-        }
+	expression: {
+        value: null
     }
 
 });
