@@ -183,7 +183,6 @@ POSSIBILITY OF SUCH DAMAGE.
 .fontGradient {
     position: relative;
     display: block;
-    line-height: 50px;
     -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,0.4) );
 }
 .isAndroid .fontGradient {

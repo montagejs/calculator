@@ -28,11 +28,15 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 </copyright> */
-var Montage = require("montage").Montage,
-    Component = require("montage/ui/component").Component,
+// var Montage = require("montage").Montage,
+//     Component = require("montage/ui/component").Component,
+//     Expression = require("model/expression").Expression;
+
+var Component = require("montage/ui/component").Component,
     Expression = require("model/expression").Expression;
 
-exports.Calculator = Montage.create(Component, {
+// exports.Calculator = Montage.create(Component, {
+exports.Calculator = Component.specialize({
 
     _currentNumberStack: {
         enumerable: false,
@@ -137,7 +141,8 @@ exports.Calculator = Montage.create(Component, {
     buildExpression: {
         value: function() {
             if (this.expression == null) {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
+                
             }
             var aNumberString = this._currentNumberStack.join('');
             if (aNumberString.indexOf(".") != -1) {
@@ -167,7 +172,7 @@ exports.Calculator = Montage.create(Component, {
     addOperatorToExpression: {
         value: function(operatorValue) {
             if (this.expression == null) {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
                 this.expression.build(0);
             }
             this.expression.addOperator(operatorValue);
@@ -207,7 +212,7 @@ exports.Calculator = Montage.create(Component, {
                     this.buildExpression();
                 }
             } else {
-                this.expression = Montage.create(Expression);
+                this.expression = new Expression();
                 this._currentNumberStack = ["0"];
                 this.buildExpression();
                 this.expression.addOperator(this._previousOperator);
@@ -292,7 +297,7 @@ exports.Calculator = Montage.create(Component, {
             if (isNaN(currentNumber)) {
                 currentNumber = 0;
             }
-            if (operator === Expression.OP_MINUS) { // Flip the sign
+            if (operator === 'minus') { // Flip the sign
                 currentNumber = currentNumber * (-1);
             }
             this._storedMemoryValue = aMemoryValue + currentNumber;
@@ -347,25 +352,25 @@ exports.Calculator = Montage.create(Component, {
 
     handlePlusAction: {
         value: function(event) {
-            this.addOperatorToExpression(Expression.OP_PLUS);
+            this.addOperatorToExpression("plus");
         }
     },
 
     handleMinusAction: {
         value: function(event) {
-            this.addOperatorToExpression(Expression.OP_MINUS);
+            this.addOperatorToExpression("minus");
         }
     },
 
     handleMultiplyAction: {
         value: function(event) {
-            this.addOperatorToExpression(Expression.OP_MULTIPLY);
+            this.addOperatorToExpression("multiply");
         }
     },
 
     handleDivideAction: {
         value: function(event) {
-            this.addOperatorToExpression(Expression.OP_DIVIDE);
+            this.addOperatorToExpression("divide");
         }
     },
 
@@ -377,13 +382,13 @@ exports.Calculator = Montage.create(Component, {
 
     handleMemoryAddAction: {
         value: function(event) {
-            this.memoryCalculation(Expression.OP_PLUS);
+            this.memoryCalculation('plus');
         }
     },
 
     handleMemoryMinusAction: {
         value: function(event) {
-            this.memoryCalculation(Expression.OP_MINUS);
+            this.memoryCalculation('minus');
         }
     },
 

@@ -34,7 +34,15 @@ POSSIBILITY OF SUCH DAMAGE.
     	<meta charset="utf-8">
         <link rel="stylesheet" href="calculator.css"/>
         <script type="text/montage-serialization">
-        {
+        {   
+            "owner": {
+                "properties": {
+                    "element": {"#": "calculator"},
+                    "LEDElement": {"#": "led"},
+                    "currentNumberElement": {"#": "currentEntry"},
+                    "currentResultElement": {"#": "ledRes"}
+                }
+            },
             "memoryClearRecallButton": {
                 "prototype": "montage/ui/button.reel",
                 "properties": {
@@ -56,7 +64,8 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/button.reel",
                 "properties": {
                     "element": {"#": "_M_add"},
-                    "identifier": "memoryAdd"
+                    "identifier": "memoryAdd",
+                    "label": "m+"
                 },
                 "listeners": [
                     {
@@ -229,7 +238,8 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/button.reel",
                 "properties": {
                     "element": {"#": "_plus"},
-                    "identifier": "plus"
+                    "identifier": "plus",
+                    "label": "+"
                 },
                 "listeners": [
                     {
@@ -242,7 +252,8 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/button.reel",
                 "properties": {
                     "element": {"#": "_divide"},
-                    "identifier": "divide"
+                    "identifier": "divide",
+                    "label": "÷"
                 },
                 "listeners": [
                     {
@@ -255,7 +266,8 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/button.reel",
                 "properties": {
                     "element": {"#": "_minus"},
-                    "identifier": "minus"
+                    "identifier": "minus",
+                    "label": "-"
                 },
                 "listeners": [
                     {
@@ -268,7 +280,8 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/button.reel",
                 "properties": {
                     "element": {"#": "_x"},
-                    "identifier": "multiply"
+                    "identifier": "multiply",
+                    "label": "×"
                 },
                 "listeners": [
                     {
@@ -281,7 +294,8 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/button.reel",
                 "properties": {
                     "element": {"#": "_equal"},
-                    "identifier": "equal"
+                    "identifier": "equal",
+                    "label": "="
                 },
                 "listeners": [
                     {
@@ -294,7 +308,8 @@ POSSIBILITY OF SUCH DAMAGE.
                 "prototype": "montage/ui/button.reel",
                 "properties": {
                     "element": {"#": "_M_min"},
-                    "identifier": "memoryMinus"
+                    "identifier": "memoryMinus",
+                    "label": "m-"
                 },
                 "listeners": [
                     {
@@ -310,15 +325,6 @@ POSSIBILITY OF SUCH DAMAGE.
                 },
                 "bindings": {
                     "condition": {"<-": "@owner.memoryHasValue"}
-                }
-            },
-            "owner": {
-                "prototype": "components/calculator.reel",
-                "properties": {
-                    "element": {"#": "calculator"},
-                    "LEDElement": {"#": "led"},
-                    "currentNumberElement": {"#": "currentEntry"},
-                    "currentResultElement": {"#": "ledRes"}
                 }
             }
         }
@@ -340,34 +346,34 @@ POSSIBILITY OF SUCH DAMAGE.
                 <div class="table-container">
                     <div  class="table-style">
                         <div class="calc-row">
-                            <div class="calc-cell" ><div data-montage-id="_M_add" class="button MEM cal-button-operators">m+</div></div>
-                            <div class="calc-cell" ><div data-montage-id="_M_min" class="button MEM cal-button-operators">m-</div></div>
+                            <div class="calc-cell" ><div data-montage-id="_M_add" class="button MEM cal-button-operators"></div></div>
+                            <div class="calc-cell" ><div data-montage-id="_M_min" class="button MEM cal-button-operators"></div></div>
                             <div class="calc-cell" ><div data-montage-id="_MR_MC" class="button MEM cal-button-operators MR-MC"><span class="MR">mr</span><span class="MC">mc</span></div></div>
-                            <div class="calc-cell" ><div data-montage-id="_divide" class="button ARITH cal-button-operators divide">÷</div></div>
+                            <div class="calc-cell" ><div data-montage-id="_divide" class="button ARITH cal-button-operators divide"></div></div>
                         </div>
                         <div class="calc-row">
                             <div class="calc-cell" ><div data-montage-id="_1" class="button cal-button-digits"><span class="fontGradient">1</span></div></div>
                             <div class="calc-cell" ><div data-montage-id="_2" class="button cal-button-digits"><span class="fontGradient">2</span></div></div>
                             <div class="calc-cell" ><div data-montage-id="_3" class="button cal-button-digits"><span class="fontGradient">3</span></div></div>
-                            <div class="calc-cell" ><div data-montage-id="_x" class="button ARITH cal-button-operators">×</div></div>
+                            <div class="calc-cell" ><div data-montage-id="_x" class="button ARITH cal-button-operators"></div></div>
                         </div>
                         <div class="calc-row">
                             <div class="calc-cell" ><div data-montage-id="_4" class="button cal-button-digits"><span class="fontGradient">4</span></div></div>
                             <div class="calc-cell" ><div data-montage-id="_5" class="button cal-button-digits"><span class="fontGradient">5</span></div></div>
                             <div class="calc-cell" ><div data-montage-id="_6" class="button cal-button-digits"><span class="fontGradient">6</span></div></div>
-                            <div class="calc-cell" ><div data-montage-id="_plus" class="button ARITH cal-button-operators">+</div></div>
+                            <div class="calc-cell" ><div data-montage-id="_plus" class="button ARITH cal-button-operators"></div></div>
                         </div>
                         <div class="calc-row">
                             <div class="calc-cell" ><div data-montage-id="_7" class="button cal-button-digits"><span class="fontGradient">7</span></div></div>
                             <div class="calc-cell" ><div data-montage-id="_8" class="button cal-button-digits"><span class="fontGradient">8</span></div></div>
                             <div class="calc-cell" ><div data-montage-id="_9" class="button cal-button-digits"><span class="fontGradient">9</span></div></div>
-                            <div class="calc-cell" ><div data-montage-id="_minus" class="button ARITH cal-button-operators">−</div></div>
+                            <div class="calc-cell" ><div data-montage-id="_minus" class="button ARITH cal-button-operators"></div></div>
                         </div>
                         <div class="calc-row">
                             <div class="calc-cell" ><div data-montage-id="_DEL" class="button DEL cal-button-operators"><span class="CLEAR fontGradient">C</span></div></div>
                             <div class="calc-cell" ><div data-montage-id="_0" class="button cal-button-digits"><span class="fontGradient">0</span></div></div>
                             <div class="calc-cell" ><div data-montage-id="_dot" class="button cal-button-digits"><span class="fontGradient">•</span></div></div>
-                            <div class="calc-cell" ><div data-montage-id="_equal" class="button EQUAL cal-button-operators">=</div></div>
+                            <div class="calc-cell" ><div data-montage-id="_equal" class="button EQUAL cal-button-operators"></div></div>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
     "name": "calculator",
     "version": "0.1.0",
     "dependencies": {
-        "montage": "0.12.4"
+        "montage": "montagejs/montage#master"
     },
     "bundle": ["components/main.reel"]
 }
