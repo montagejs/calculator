@@ -1,3 +1,5 @@
+builds/
+dist/packages/**/*.md
 .idea
-node_modules
 .DS_Store
+node_modules
