@@ -1,0 +1,1 @@
+montageDefine("443a4e8","data/service/connection-descriptor",{dependencies:["core/core"],factory:function(e,o,c){var n=e("core/core").Montage;o.ConnectionDescriptor=n.specialize({name:{value:void 0}})}});

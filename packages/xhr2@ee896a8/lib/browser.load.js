@@ -1,0 +1,1 @@
+montageDefine("ee896a8","lib/browser",{dependencies:[],factory:function(e,t,n){n.exports=XMLHttpRequest}});
